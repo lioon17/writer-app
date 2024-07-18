@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    
+    <style>/* Add your CSS styles here */
+   /* Add your CSS styles here */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.order-summary-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.order-summary-container h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.order-summary-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.order-summary-container ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.order-summary-container .total-price {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.order-summary-container .payment-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.order-summary-container .payment-container input {
+    padding: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    width: 100%;
+}
+
+.order-summary-container .payment-container button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.order-summary-container .payment-container button img.mpesa-logo {
+    height: 20px;
+    margin-right: 10px;
+}
+
+.order-summary-container .payment-container button:hover {
+    background-color: #45a049;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .order-summary-container {
+        padding: 15px;
+        margin: 30px auto;
+    }
+
+    .order-summary-container h2 {
+        font-size: 1.5em;
+    }
+
+    .order-summary-container ul li {
+        padding: 8px 0;
+        font-size: 0.9em;
+    }
+
+    .order-summary-container .total-price {
+        font-size: 18px;
+    }
+
+    .order-summary-container .payment-container input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .order-summary-container .payment-container button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-summary-container {
+        padding: 10px;
+        margin: 20px auto;
+    }
+
+    .order-summary-container h2 {
+        font-size: 1.2em;
+    }
+
+    .order-summary-container ul li {
+        padding: 5px 0;
+        font-size: 0.8em;
+    }
+
+    .order-summary-container .total-price {
+        font-size: 16px;
+    }
+
+    .order-summary-container .payment-container input {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .order-summary-container .payment-container button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+
+#phoneNumberInput {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+#mpesaButton {
+    background-color: #2f802f;
+    color: white;
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding and border are included in the width */
+}
+
+#mpesaButton:hover {
+    background-color: #2a8a1b;
+}
+
+.mpesa-logo {
+    height: 35px;
+    margin-right: 10px;
+}
+
+
+
+        </style>
+</head>
+<body>
+    <div class="order-summary-container">
+        <h2>Your Order Summary</h2>
+        <ul id="orderSummaryList">
+            <!-- Order summary items will be dynamically added here -->
+        </ul>
+        <div class="total-price">
+            <span>Total price: <strong id="totalPrice">$0.00</strong></span>
+        </div>
+        <div id="paypal-button-container"></div>
+        <div class="payment-container">
+            <input type="text" id="phoneNumberInput" placeholder="Phone number start with 254">
+            <button type="button" id="mpesaButton">
+                <img src="/pdf/2560px-M-PESA_LOGO-01.png" alt="M-Pesa Logo" class="mpesa-logo"> Pay with M-Pesa
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('phoneNumberInput').addEventListener('input', (event) => {
+            let phoneNumber = event.target.value;
+            if (!phoneNumber.startsWith('254')) {
+                phoneNumber = '254' + phoneNumber.replace(/^0+/, ''); // Remove leading zeros and add '254'
+                event.target.value = phoneNumber;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Retrieve the order summary from localStorage
+            const orderSummary = JSON.parse(localStorage.getItem('orderSummary'));
+
+            if (orderSummary) {
+                const orderSummaryList = document.getElementById('orderSummaryList');
+                const totalPriceElement = document.getElementById('totalPrice');
+
+                // Populate the order summary list
+                for (const [key, value] of Object.entries(orderSummary)) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${key.replace(/([A-Z])/g, ' $1')}: ${value}`;
+                    orderSummaryList.appendChild(listItem);
+                }
+
+                // Calculate and display the total price
+                const totalPrice = orderSummary.totalPrice || 0;
+                totalPriceElement.textContent = `$${parseFloat(totalPrice).toFixed(2)}`;
+            }
+        });
+
+        document.getElementById('mpesaButton').addEventListener('click', async () => {
+            const phoneNumber = document.getElementById('phoneNumberInput').value;
+            const totalPriceText = document.getElementById('totalPrice').innerText;
+            const totalPriceInDollars = parseFloat(totalPriceText.replace('$', ''));
+
+            if (!phoneNumber) {
+                alert('Please enter your phone number');
+                return;
+            }
+
+            // Validate the phone number
+            if (!phoneNumber.startsWith('2547') || phoneNumber.length !== 12) {
+                alert('Please enter a valid phone number starting with 2547');
+                return;
+            }
+
+            // Assuming a fixed conversion rate (1 USD = 110 KES)
+            const conversionRate = 110;
+            const totalPriceInKES = Math.round(totalPriceInDollars * conversionRate);
+
+            try {
+                const response = await fetch('/stkpush', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phoneNumber: phoneNumber,
+                        amount: totalPriceInKES.toString()
+                    }),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('😀 Request is successfully done. Please enter M-Pesa PIN to complete the transaction');
+                    submitOrderDetails();
+                } else {
+                    alert('❌ Request failed: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ Request failed');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                // Fetch the PayPal client ID from the server
+                const response = await fetch('/paypal-client-id');
+                const data = await response.json();
+                const clientId = data.clientId;
+
+                // Load the PayPal SDK
+                const script = document.createElement('script');
+                script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+                script.onload = function () {
+                    // PayPal button rendering
+                    paypal.Buttons({
+                        createOrder: function (data, actions) {
+                            const totalPriceElement = document.getElementById('totalPrice');
+                            const totalPrice = parseFloat(totalPriceElement.textContent.replace('$', ''));
+
+                            return actions.order.create({
+                                purchase_units: [{
+                                    amount: {
+                                        value: totalPrice.toFixed(2)
+                                    }
+                                }]
+                            });
+                        },
+                        onApprove: function (data, actions) {
+                            return actions.order.capture().then(function (details) {
+                                alert('Transaction completed by ' + details.payer.name.given_name);
+                                submitOrderDetails();
+                            });
+                        },
+                        onError: function (err) {
+                            console.error('Error during the transaction', err);
+                            alert('An error occurred during the transaction. Please try again.');
+                        }
+                    }).render('#paypal-button-container'); // Display PayPal buttons
+                };
+                document.body.appendChild(script);
+            } catch (error) {
+                console.error('Failed to fetch PayPal client ID', error);
+            }
+        });
+
+        function submitOrderDetails() {
+            const orderSummary = JSON.parse(localStorage.getItem('orderSummary'));
+            fetch('/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(orderSummary),
+            }).then(response => response.json())
+              .then(data => {
+                  console.log('Order submitted:', data);
+              }).catch(error => {
+                  console.error('Error submitting order:', error);
+              });
+        }
+    </script>
+</body>
+</html>

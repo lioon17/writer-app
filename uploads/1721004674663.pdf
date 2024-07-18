@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Essay Writing Service</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <style>
+</style>
+</head>
+<body>
+
+
+    <header>
+
+        <div class="top-bar">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <div class="logo">WRITERS<span>BLOCK</span></div>
+              </a>
+            <nav>
+                <ul class="sidebar">
+                    <li onclick="closeSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                    <li class="dropdown"><a href="#">Services</a>
+                        <ul class="dropdown-content">
+                            <li class="dropdown-section">
+                                <h4>Writing Services</h4>
+                                <a href="#">Write My Essay</a>
+                                <a href="#">Research Paper Writing Service</a>
+                                <a href="#">Write My Paper</a>
+                                <a href="#">Term Paper Writing Service</a>
+                                <a href="#">College Paper Writing Service</a>
+                            </li>
+                            <li class="dropdown-section">
+                                <h4>Advanced Services</h4>
+                                <a href="#">Dissertation Writing Service</a>
+                                <a href="#">Thesis Writing Service</a>
+                                <a href="#">Coursework Writing Service</a>
+                                <a href="#">Book Report Writing Service</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="/pricing">Prices</a></li>
+                    <li><a href="/sample">Samples</a></li>
+                    <li><a href="/review">Reviews</a></li>
+                    <li class="dropdown"><a href="#">More</a>
+                        <ul class="dropdown-content">
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </li>
+                
+                </ul>
+            
+                <ul>
+                    <!--  <li class="dropdown hideOnMobile"><a href="#">Services</a>
+                       <ul id="serviceDropdown" class="dropdown-content">
+                            <li class="dropdown-section">
+                                <h4>Writing Services</h4>
+                                <a href="#" data-service="essay">Write My Essay</a>
+                                <a href="#" data-service="research-paper">Research Paper Writing Service</a>
+                                <a href="#" data-service="write-paper">Write My Paper</a>
+                                <a href="#" data-service="term-paper">Term Paper Writing Service</a>
+                                <a href="#" data-service="college-paper">College Paper Writing Service</a>
+                            </li>
+                            <li class="dropdown-section">
+                                <h4>Advanced Services</h4>
+                                <a href="#" data-service="dissertation">Dissertation</a>
+                                <a href="#" data-service="thesis">Thesis</a>
+                                <a href="#" data-service="course-work">Coursework</a>
+                                <a href="#" data-service="book-report">Book Report</a>
+                            </li>
+                        </ul>
+                    </li>-->
+                    <li class="hideOnMobile"><a href="/pricing">Prices</a></li>
+                    <li class="hideOnMobile"><a href="/sample">Samples</a></li>
+                    <li class="hideOnMobile"><a href="/review">Reviews</a></li>
+                    <li class="dropdown hideOnMobile"><a href="#">More</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/contact us">Contact us</a></li>
+                            <li><a href="/contact us">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="contact-info">
+                        
+                        <a href="#">Login</a>
+                        <button class="order-now" onclick="redirectToOrderPage()">Order Now</button>
+                        <button class="menu" onclick="showSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z"/></svg></a></a>
+                    </li>
+                                  </ul>
+            </nav>
+        </div>
+</header>
+    
+
+<div class="container-samples">
+    <div class="hs">
+        <h1>Samples of our work</h1>
+        <p>At Canadian Writings, we believe in complete transparency and providing our customers with a clear understanding of the quality work we deliver. That's why we've compiled a selection of sample papers crafted by our expert writers across various subjects and academic levels.</p>
+    </div>
+    <div class="samples-and-calculator">
+        <div class="samples">
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>The Pleistocene Megafauna’s Extinction in North America</p>
+                <p><strong>Pages:</strong> 11</p>
+                <p><strong>Urgency:</strong> 5 days</p>
+                <a href="pdf/KVB HUMAN RESOURCE MANUAL - JULY 2018-FINAL (1).pdf" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>3PL and 4PL Suppliers in North America</p>
+                <p><strong>Pages:</strong> 10</p>
+                <p><strong>Urgency:</strong> 14 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Coursework:</h2>
+                <p>Interaction of the English settlers and the Native Americans</p>
+                <p><strong>Pages:</strong> 3</p>
+                <p><strong>Urgency:</strong> 3 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>Macronutrients</p>
+                <p><strong>Pages:</strong> 4</p>
+                <p><strong>Urgency:</strong> 14 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>The Pleistocene Megafauna’s Extinction in North America</p>
+                <p><strong>Pages:</strong> 11</p>
+                <p><strong>Urgency:</strong> 5 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Essay:</h2>
+                <p>Upper Class and Working Class</p>
+                <p><strong>Pages:</strong> 2</p>
+                <p><strong>Urgency:</strong> 24 hours</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>Compensation Plans for Private Sector CEOs in North America</p>
+                <p><strong>Pages:</strong> 6</p>
+                <p><strong>Urgency:</strong> 7 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Essay:</h2>
+                <p>Philosophy: Definition of Ethics</p>
+                <p><strong>Pages:</strong> 3</p>
+                <p><strong>Urgency:</strong> 48 hours</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+        </div>
+        <div class="calculator">
+            <h2>Calculate the price of your order:</h2>
+            <form id="calculatorForm">
+                <label for="service">Academic paper writing</label>
+                <select id="service">
+                    <option value="essay">Write My Essay</option>
+                    <option value="research-paper">Research Paper Writing Service</option>
+                    <option value="write-paper">Write My Paper</option>
+                    <option value="term-paper">Term Paper Writing Service</option>
+                    <option value="college-paper">College Paper Writing Service</option>
+                    <option value="dissertation">Dissertation</option>
+                    <option value="thesis">Thesis</option>
+                    <option value="course-work">Coursework</option>
+                    <option value="book-report">Book Report</option>
+                </select>
+                <label for="level">Academic Level</label>
+                <select id="level">
+                    <option value="high-school">High School</option>
+                    <option value="freshman">Freshman</option>
+                    <option value="sophomore">Sophomore</option>
+                    <option value="junior">Junior</option>
+                    <option value="masters">Masters</option>
+                </select>
+                <label for="pages">Number of pages</label>
+                <input type="number" id="pages" value="1" min="1">
+                <label for="deadline">Deadline</label>
+                <input type="date" id="deadline" value="2024-06-28">
+                <div class="total-price">Total price: <span id="totalPrice">$12.99</span></div>
+                <button type="button" class="order-now" onclick="storeFormData()">Order Now</button>
+            </form>
+        </div> 
+    </div>
+    <div class="cta">
+        <h2>Get professional writing help!</h2>
+        <p>Don't worry, our experts handle any type of research projects!</p>
+        <button onclick="window.location.href='/order';">Order now</button>
+    </div>
+    <div class="pagination">
+        <span class="page-link">1</span>
+        <span class="page-link">2</span>
+    </div>
+</div>
+
+  <!-- Modal -->
+  <div id="sampleModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
+<script>
+   
+</script>
+<footer class="footer">
+    <div class="footer-top">
+        <div class="contact-info">
+            <i class="fas fa-phone-alt"></i> +1 234 567 8901
+            <i class="fas fa-envelope"></i> support@eduwrite.com
+        </div>
+        <div class="footer-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Refund Policy</a>
+        </div>
+    </div>
+    <div class="footer-main">
+        <div class="footer-column">
+            <h3>Services</h3>
+            <ul>
+                <li><a href="#">Essay Writing</a></li>
+                <li><a href="#">Dissertation Writing</a></li>
+                <li><a href="#">Assignment Help</a></li>
+                <li><a href="#">Coursework Help</a></li>
+                <li><a href="#">Thesis Writing</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Subjects</h3>
+            <ul>
+                <li><a href="#">Law</a></li>
+                <li><a href="#">Business</a></li>
+                <li><a href="#">Nursing</a></li>
+                <li><a href="#">Finance</a></li>
+                <li><a href="#">Marketing</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Payment Methods</h3>
+            <div class="payment-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+                <i class="fab fa-cc-discover"></i>
+                <i class="fas fa-university"></i>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; EduWrite, 2024. All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</footer>
+
+
+<script src="/script.js"></script>
+</body>
+</html>

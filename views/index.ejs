@@ -1,0 +1,350 @@
+
+<%- include('partials/header') %>
+
+    <main class="main">
+        <section class="hero">
+            <div class="left-column">
+                <div class="discount">
+                    <span>Save 15%! Use BOOM15 discount code</span>
+                </div>
+                <h1>Professional Essay Writing Service</h1>
+                <p>We write your essays while you focus on what matters</p>
+                <div class="reviews">
+                    <span class="rating">Excellent <span>⭐⭐⭐⭐⭐</span></span>
+                    <span>Based on 500+ customer's reviews</span>
+                </div>
+            </div>
+            <div class="right-column">
+                <div class="calculator">
+                    <h2>Calculate the price of your order:</h2>
+                    <form id="calculatorForm">
+                        <label for="service">Academic paper writing</label>
+                        <select id="service">
+                            <option value="essay">Write My Essay</option>
+                            <option value="research-paper">Research Paper Writing Service</option>
+                            <option value="write-paper">Write My Paper</option>
+                            <option value="term-paper">Term Paper Writing Service</option>
+                            <option value="college-paper">College Paper Writing Service</option>
+                            <option value="dissertation">Dissertation</option>
+                            <option value="thesis">Thesis</option>
+                            <option value="course-work">Coursework</option>
+                            <option value="book-report">Book Report</option>
+                        </select>
+                        <label for="level">Academic Level</label>
+                        <select id="level">
+                            <option value="high-school">High School</option>
+                            <option value="freshman">Freshman</option>
+                            <option value="sophomore">Sophomore</option>
+                            <option value="junior">Junior</option>
+                            <option value="masters">Masters</option>
+                        </select>
+                        <label for="pages">Number of pages</label>
+                        <input type="number" id="pages" value="1" min="1">
+                        <label for="deadline">Deadline</label>
+                        <input type="date" id="deadline" value="2024-07-24">
+                        <div class="total-price">Total price: <span id="totalPrice">$12.99</span></div>
+                        <button type="button" class="order-now" onclick="storeFormData()">Order Now</button>
+                    </form>
+                </div>         
+            </div>
+            
+        </section>
+    </main>
+
+    <div class="wrapper">
+    <section class="content-section">
+        <div class="animation-section">
+            <dotlottie-player src="https://lottie.host/b8d4bf5b-0cd3-480a-b77e-2dff7405bec8/6g9FQLknff.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></dotlottie-player>
+        </div>
+        <div class="info-section">
+            <div class="info-item">
+                <i class="fas fa-clock"></i> <!-- Time icon -->
+                <div>
+                    <p>On time delivery</p>
+                   <!-- <span> <i class=""></i></span>-->
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-tags"></i> <!-- Price icon -->
+                <div>
+                    <p>Affordable prices</p>
+                 <!--   <span> <i class=""></i></span> -->
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-file-alt"></i> <!-- Writing paper icon -->
+                <div>
+                    <p>Originality guarantee, No AI</p>
+                    <span>100%</span>
+                </div>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-headset"></i> <!-- Customer support icon remains the same -->
+                <div>
+                    <p>Customer support</p>
+                    <span>24/7</span>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="ordering-process">
+        <div class="container">
+            <h1>Ordering Process</h1>
+            <p>Our professionals ensure that your journey will be as smooth as water</p>
+            <div class="buttons">
+                <button class="btn calculate-order" onclick="window.location.href='/';">Calculate Your Order</button>
+                <button class="btn check-prices" onclick="window.location.href='/pricing';">Check Prices</button>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="icon">
+                        <img src="https://img.icons8.com/ios-filled/100/ffffff/form.png" alt="form icon"/>
+                    </div>
+                    <h2>1</h2>
+                    <h3>Fill-in the details</h3>
+                    <p>Provide everything important. Once you complete the order form and pay to write your essay, we will immediately start working on it.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">
+                        <img src="https://img.icons8.com/ios-filled/100/ffffff/worker-male.png" alt="worker icon"/>
+                    </div>
+                    <h2>2</h2>
+                    <h3>Your writer assigned</h3>
+                    <p>Our team will review your order and select a preferable expert to work on your paper.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">
+                        <img src="https://img.icons8.com/ios-filled/100/ffffff/magic.png" alt="magic icon"/>
+                    </div>
+                    <h2>3</h2>
+                    <h3>Writing magic happens</h3>
+                    <p>Our authors are working tirelessly to finish your assignment. Then it will go through our quality assurance team.</p>
+                </div>
+                <div class="step">
+                    <div class="icon">
+                        <img src="https://img.icons8.com/ios-filled/100/ffffff/feedback.png" alt="feedback icon"/>
+                    </div>
+                    <h2>4</h2>
+                    <h3>Leave your feedback</h3>
+                    <p>Please let us know if you have any concerns or suggestions for improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div class="review-carousel">
+            <button class="carousel-btn left-btn" onclick="moveCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="review-card-container">
+                <div class="review-card active">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <i class="fas fa-user-circle reviewer-icon"></i>
+                            <p class="reviewer-name">Marlene</p>
+                            <p class="reviewer-location"><i class="fas fa-map-marker-alt location-icon"></i> Seattle, WA, US</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>I found a sample of a coursework in here and basically fell in love with it. Thankful to the writer of CanadianWritings for performing even a better one for me.</p>
+                        <span class="review-tag">Coursework, 10 days, Junior</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <i class="fas fa-user-circle reviewer-icon"></i>
+                            <p class="reviewer-name">John</p>
+                            <p class="reviewer-location"><i class="fas fa-map-marker-alt location-icon"></i> New York, NY, US</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>Great service and fast delivery! My essay was done perfectly and on time.</p>
+                        <span class="review-tag">Essay, 5 days, Freshman</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <i class="fas fa-user-circle reviewer-icon"></i>
+                            <p class="reviewer-name">Sophia</p>
+                            <p class="reviewer-location"><i class="fas fa-map-marker-alt location-icon"></i> Los Angeles, CA, US</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>The quality of the work was excellent. I'll definitely use their service again.</p>
+                        <span class="review-tag">Research Paper, 7 days, Sophomore</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <i class="fas fa-user-circle reviewer-icon"></i>
+                            <p class="reviewer-name">Michael</p>
+                            <p class="reviewer-location"><i class="fas fa-map-marker-alt location-icon"></i> Chicago, IL, US</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>Excellent customer service and high-quality writing. Highly recommend!</p>
+                        <span class="review-tag">Term Paper, 14 days, Junior</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <i class="fas fa-user-circle reviewer-icon"></i>
+                            <p class="reviewer-name">Emily</p>
+                            <p class="reviewer-location"><i class="fas fa-map-marker-alt location-icon"></i> Austin, TX, US</p>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p>Very satisfied with the dissertation. The writer was very professional and attentive.</p>
+                        <span class="review-tag">Dissertation, 30 days, Masters</span>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn right-btn" onclick="moveCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <button class="read-all-btn" onclick="window.location.href='/review';">Read all reviews</button>
+    </section>
+
+    <section class="services-section">
+        <h1>High Quality Essay Writing Services for Every Student</h1>
+        <p>Welcome to EduWrite - your trusted partner for reliable and top-notch writing services!</p>
+        <p>Feeling overwhelmed with assignments? Let us help you achieve academic excellence with our expertly crafted essays. Our dedicated writers are here to provide you with well-researched, original content tailored to your needs.</p>
+        
+        <div class="features">
+            <h2>Our Key Features</h2>
+            <div class="feature-item">
+                <i class="fas fa-check-circle"></i>
+                <div>
+                    <h3>Top-Qualified Writers</h3>
+                    <p>Our team consists of professionals with advanced degrees and extensive experience in academic writing.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3>Timely Delivery</h3>
+                    <p>We understand the importance of deadlines and guarantee on-time delivery, every time.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <div>
+                    <h3>100% Original Content</h3>
+                    <p>All our papers are written from scratch, ensuring originality and uniqueness.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Get Professional Writing Help Now!</h2>
+            <p>Whether you're dealing with tight deadlines or complex topics, EduWrite is here to ensure you receive top-notch service and outstanding results.</p>
+            <button class="cta-btn" onclick="window.location.href='/order';">Order Now</button>
+        </div>
+        
+        <div class="benefits-section">
+            <h2>Why Choose Our Services?</h2>
+            <div class="benefit-item">
+                <i class="fas fa-lock"></i>
+                <div>
+                    <h3>Confidentiality</h3>
+                    <p>We prioritize your privacy and ensure complete confidentiality of your personal information.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-rocket"></i>
+                <div>
+                    <h3>Fast Turnaround</h3>
+                    <p>Need your paper quickly? We offer fast turnaround times to meet your urgent deadlines.</p>
+                </div>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-thumbs-up"></i>
+                <div>
+                    <h3>Customer Satisfaction</h3>
+                    <p>Our customers are our top priority. We strive to ensure you are completely satisfied with our service.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="features-table">
+            <h2>Included Free Features</h2>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td>Plagiarism Report</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>Formatting</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>Title Page</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>References</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td>Revisions</td>
+                    <td>Free</td>
+                </tr>
+            </table>
+            <button class="order-btn" onclick="window.location.href='/order';">Order Now and Save $50</button>
+        </div>
+    </section>
+
+</div>
+<script>
+    
+//calculator
+
+    
+</script>
+   
+<%- include('partials/footer') %>

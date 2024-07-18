@@ -1,0 +1,1011 @@
+<%- include('partials/header') %>
+
+<div class="containerpay">
+    <div class="left-container">
+        <form id="paperDetailsForm" action="/order" method="POST" enctype="multipart/form-data">
+            <div class="tab-menu">
+                <button type="button" class="tab-button active" onclick="openTab(event, 'PaperDetails')">Paper details</button>
+                <button type="button" class="tab-button" onclick="openTab(event, 'OrderPreferences')">Order preferences</button>
+                <button type="button" class="tab-button" onclick="openTab(event, 'ContactInformation')">Contact information</button>
+            </div>
+
+            <!-- Paper Details Tab -->
+            <div id="PaperDetails" class="tab-content active">
+                <h2>Paper details</h2>
+
+                <div class="form-group">
+                    <label for="serviceType">Type of service</label>
+                    <select id="serviceType" name="serviceType" onchange="updateSummary()">
+                        <option value="essay">Write My Essay</option>
+                        <option value="research-paper">Research Paper Writing Service</option>
+                        <option value="write-paper">Write My Paper</option>
+                        <option value="term-paper">Term Paper Writing Service</option>
+                        <option value="college-paper">College Paper Writing Service</option>
+                        <option value="dissertation">Dissertation</option>
+                        <option value="thesis">Thesis</option>
+                        <option value="course-work">Coursework</option>
+                        <option value="book-report">Book Report</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="paperType">Type of paper</label>
+                    <select id="paperType" name="paperType" onchange="updateSummary()">
+                        <option value="doctoral">Doctoral</option>
+                        <option value="research">Research Paper</option>
+                        <option value="review">Literature Review</option>
+                        <option value="case_study">Case Study</option>
+                        <option value="thesis">Thesis</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="subjectArea">Subject area</label>
+                    <select id="subjectArea" name="subjectArea" onchange="updateSummary()">
+                        <option value="">Select subject area</option>
+                        <option value="computer_science">Computer Science</option>
+                        <option value="biology">Biology</option>
+                        <option value="psychology">Psychology</option>
+                        <option value="business">Business</option>
+                        <option value="engineering">Engineering</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">Topic</label>
+                    <input type="text" id="topic" name="topic" onchange="updateSummary()">
+                </div>
+
+                <div class="form-group">
+                    <label for="paperDetails">Paper details</label>
+                    <textarea id="paperDetails" name="paperDetails" onchange="updateSummary()"></textarea>
+                </div>
+
+                <div class="file-upload-wrapper form-group">
+                    <label for="uploadFiles" class="file-label">Additional Materials</label>
+                    <div class="file-input-container">
+                        <button type="button" class="add-files-button" onclick="document.getElementById('uploadFiles').click()">+ ADD FILES</button>
+                        <input type="file" id="uploadFiles" name="additionalMaterials" class="file-input" multiple style="display: none;" onchange="handleFiles(this.files)">
+                    </div>
+                    <ul id="fileList" class="file-list"></ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="paperFormat">Paper format</label>
+                    <div class="radio-group flex-group">
+                        <label class="radio-label">
+                            <input type="radio" name="paperFormat" value="MLA" checked onchange="updateSummary()">
+                            <span class="radio-text">MLA</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="paperFormat" value="APA" onchange="updateSummary()">
+                            <span class="radio-text">APA</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="paperFormat" value="Chicago" onchange="updateSummary()">
+                            <span class="radio-text">Chicago</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="paperFormat" value="Harvard" onchange="updateSummary()">
+                            <span class="radio-text">Harvard</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="paperFormat" value="Turabian" onchange="updateSummary()">
+                            <span class="radio-text">Footnotes</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="references">Number of references</label>
+                    <input type="number" id="references" name="references" min="0" onchange="updateSummary()">
+                </div>
+
+                <div class="form-group">
+                    <label for="academicLevel">Academic level</label>
+                    <div class="radio-group flex-group">
+                        <label class="radio-label">
+                            <input type="radio" name="academicLevel" value="Freshman" onchange="updateSummary()">
+                            <span class="radio-text">Freshman</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="academicLevel" value="Sophomore" onchange="updateSummary()">
+                            <span class="radio-text">Sophomore</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="academicLevel" value="Junior" onchange="updateSummary()">
+                            <span class="radio-text">Junior</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="academicLevel" value="Senior" onchange="updateSummary()">
+                            <span class="radio-text">Senior</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="academicLevel" value="Masters" onchange="updateSummary()">
+                            <span class="radio-text">Master's</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="academicLevel" value="Doctoral" onchange="updateSummary()">
+                            <span class="radio-text">Doctoral</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pageCount">Number of pages or words</label>
+                    <div class="page-control">
+                        <button type="button" onclick="changePageCount(-1)">-</button>
+                        <input type="number" id="pageCount" name="pageCount" value="1" min="1" onchange="updateSummary()">
+                        <button type="button" onclick="changePageCount(1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="spacing">Spacing</label>
+                    <div class="radio-group flex-group">
+                        <label class="radio-label">
+                            <input type="radio" name="spacing" value="Double" checked onchange="updateSummary()">
+                            <span class="radio-text">Double Spaced</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="spacing" value="Single" onchange="updateSummary()">
+                            <span class="radio-text">Single Spaced</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="urgency">Urgency</label>
+                    <select id="urgency" name="urgency" onchange="updateTotalPrice()">
+                        <option value="31days">31 days</option>
+                        <option value="30days">30 days</option>
+                        <option value="29days">29 days</option>
+                        <option value="28days">28 days</option>
+                        <option value="27days">27 days</option>
+                        <option value="26days">26 days</option>
+                        <option value="25days">25 days</option>
+                        <option value="24days">24 days</option>
+                        <option value="23days">23 days</option>
+                        <option value="22days">22 days</option>
+                        <option value="21days">21 days</option>
+                        <option value="20days">20 days</option>
+                        <option value="19days">19 days</option>
+                        <option value="18days">18 days</option>
+                        <option value="17days">17 days</option>
+                        <option value="16days">16 days</option>
+                        <option value="15days">15 days</option>
+                        <option value="14days">14 days</option>
+                        <option value="13days">13 days</option>
+                        <option value="12days">12 days</option>
+                        <option value="11days">11 days</option>
+                        <option value="10days">10 days</option>
+                        <option value="9days">9 days</option>
+                        <option value="8days">8 days</option>
+                        <option value="7days">7 days</option>
+                        <option value="6days">6 days</option>
+                        <option value="5days">5 days</option>
+                        <option value="4days">4 days</option>
+                        <option value="3days">3 days</option>
+                        <option value="2days">2 days</option>
+                        <option value="1day">1 day</option>
+                        <option value="12hours">12 hours</option>
+                        <option value="6hours">6 hours</option>
+                        <option value="3hours">3 hours</option>
+                    </select>
+                </div>
+
+                <div class="price-summary">
+                    <span>Total price: <strong id="totalPriceSummary">$0.00</strong></span>
+                    <input type="hidden" id="totalPriceInput" name="totalPrice">
+                    <button type="button" onclick="openTab(event, 'OrderPreferences')">Next step</button>
+                </div>
+            </div>
+
+            <!-- Order Preferences Tab -->
+            <div id="OrderPreferences" class="tab-content">
+                <h2>Order preferences</h2>
+
+                <div class="form-group">
+                    <label>Writer level</label>
+                    <div class="radio-group flex-group center-group">
+                        <label class="box-label">
+                            <input type="radio" name="writerLevel" value="Best" checked onchange="updateSummary()">
+                            <span>FREE Best Available</span>
+                        </label>
+                        <label class="box-label">
+                            <input type="radio" name="writerLevel" value="Premium" onchange="updateSummary()">
+                            <span>+25% Premium</span>
+                        </label>
+                        <label class="box-label">
+                            <input type="radio" name="writerLevel" value="Top10" onchange="updateSummary()">
+                            <span>+35% Top 10</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalInstructions">Additional instructions</label>
+                    <textarea id="additionalInstructions" name="additionalInstructions" onchange="updateSummary()"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional services</label>
+                    <div class="checkbox-group flex-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="additionalServices" value="PlagiarismReport" onchange="updateSummary()">
+                            <span class="checkbox-text">Plagiarism report</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="additionalServices" value="GrammarCheck" onchange="updateSummary()">
+                            <span class="checkbox-text">Grammar Check</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Notifications</label>
+                    <div class="checkbox-group flex-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="notifications" value="OrderApproved" checked onchange="updateSummary()">
+                            <span class="checkbox-text">Order Approved</span>
+                        </label>
+
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="notifications" value="OrderStatusChange" checked onchange="updateSummary()">
+                            <span class="checkbox-text">Order Status Changed</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="price-summary">
+                    <button type="button" onclick="openTab(event, 'ContactInformation')">Next step</button>
+                </div>
+            </div>
+
+            <!-- Contact Information Tab -->
+            <div id="ContactInformation" class="tab-content">
+                <h2>Contact information</h2>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required onchange="updateSummary()">
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNumber">Phone number</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required onchange="updateSummary()">
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">Full name</label>
+                    <input type="text" id="fullName" name="fullName" required onchange="updateSummary()">
+                </div>
+
+                <div class="form-group">
+                    <label for="preferredContactMethod">Preferred contact method</label>
+                    <select id="preferredContactMethod" name="preferredContactMethod" onchange="updateSummary()">
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="timezone">Timezone</label>
+                    <select id="timezone" name="timezone" onchange="updateSummary()">
+                         <!-- Your timezone options here -->
+                    </select>
+                </div>
+
+                <div class="price-summary">
+                    <button type="submit">Submit order</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="right-container">
+        <form id="orderForm" method="POST" action="/order">
+            <div class="order-summary">
+                <h2>Order summary</h2>
+                <ul id="orderSummaryList">
+                    <!-- Order summary items will be dynamically added here -->
+                </ul>
+                <div class="total-price">
+                    <span>Total price: <strong id="totalPrice">$0.00</strong></span>
+                </div>
+                <div id="paypal-button-container"></div>
+
+                <div class="payment-container">
+                    <input type="text" id="phoneNumberInput" placeholder=" Phone number start with 254">
+                    <button type="button" id="mpesaButton">
+                        <img src="/pdf/2560px-M-PESA_LOGO-01.png" alt="M-Pesa Logo" class="mpesa-logo"> Pay with M-Pesa
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    
+document.getElementById('phoneNumberInput').addEventListener('input', (event) => {
+    let phoneNumber = event.target.value;
+    if (!phoneNumber.startsWith('254')) {
+        phoneNumber = '254' + phoneNumber.replace(/^0+/, ''); // Remove leading zeros and add '254'
+        event.target.value = phoneNumber;
+    }
+});
+
+document.getElementById('mpesaButton').addEventListener('click', async () => {
+    const phoneNumber = document.getElementById('phoneNumberInput').value;
+    const totalPriceText = document.getElementById('totalPrice').innerText;
+    const totalPriceInDollars = parseFloat(totalPriceText.replace('$', ''));
+
+    if (!phoneNumber) {
+        alert('Please enter your phone number');
+        return;
+    }
+
+    // Validate the phone number
+    if (!phoneNumber.startsWith('2547') || phoneNumber.length !== 12) {
+        alert('Please enter a valid phone number starting with 2547');
+        return;
+    }
+
+    // Assuming a fixed conversion rate (1 USD = 110 KES)
+    const conversionRate = 110;
+    const totalPriceInKES = Math.round(totalPriceInDollars * conversionRate);
+
+    try {
+        const response = await fetch('/stkpush', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                phoneNumber: phoneNumber,
+                amount: totalPriceInKES.toString()
+            }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert('😀 Request is successfully done. Please enter M-Pesa PIN to complete the transaction');
+        } else {
+            alert('❌ Request failed: ' + result.message);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('❌ Request failed');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Fetch the PayPal client ID from the server
+        const response = await fetch('/paypal-client-id');
+        const data = await response.json();
+        const clientId = data.clientId;
+
+        // Load the PayPal SDK
+        const script = document.createElement('script');
+        script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&currency=USD`;
+        script.onload = function() {
+            // PayPal button rendering
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    const totalPriceElement = document.getElementById('totalPrice');
+                    const totalPrice = parseFloat(totalPriceElement.textContent.replace('$', ''));
+
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: totalPrice.toFixed(2)
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Transaction completed by ' + details.payer.name.given_name);
+                        // Redirect or handle post-payment logic here
+                    });
+                },
+                onError: function(err) {
+                    console.error('Error during the transaction', err);
+                    alert('An error occurred during the transaction. Please try again.');
+                }
+            }).render('#paypal-button-container'); // Display PayPal buttons
+        };
+        document.body.appendChild(script);
+    } catch (error) {
+        console.error('Failed to fetch PayPal client ID', error);
+    }
+});
+
+// Files
+let selectedFiles = [];
+
+function handleFiles(files) {
+    const fileList = document.getElementById('fileList');
+
+    // Convert FileList to an array
+    const newFiles = Array.from(files);
+
+    // Check if adding these files exceeds the limit of 12
+    if (selectedFiles.length + newFiles.length > 12) {
+        alert('You can only add up to 12 files.');
+        return;
+    }
+
+    selectedFiles = selectedFiles.concat(newFiles);
+    updateFileList();
+}
+
+function updateFileList() {
+    const fileList = document.getElementById('fileList');
+    fileList.innerHTML = ''; // Clear existing list
+
+    selectedFiles.forEach((file, index) => {
+        const listItem = document.createElement('li');
+
+        const removeButton = document.createElement('span');
+        removeButton.textContent = '✘';
+        removeButton.classList.add('remove-file');
+        removeButton.onclick = () => removeFile(index);
+
+        const fileName = document.createTextNode(file.name);
+
+        listItem.appendChild(removeButton);
+        listItem.appendChild(fileName);
+        fileList.appendChild(listItem);
+    });
+}
+
+function removeFile(index) {
+    selectedFiles.splice(index, 1);
+    updateFileList();
+}
+
+// Order page
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('.checkbox-wrapper-43 input[type="checkbox"]');
+    const pageCountInput = document.querySelector('.page-count input[type="text"]');
+    const incrementButton = document.querySelector('.page-count button:nth-of-type(2)');
+    const decrementButton = document.querySelector('.page-count button:nth-of-type(1)');
+    const priceDisplay = document.createElement('div');
+    priceDisplay.className = 'total-price';
+    document.querySelector('.pricing-options').appendChild(priceDisplay);
+    let pricePerPage = 12.99; // Default price per page
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            checkboxes.forEach(cb => {
+                if (cb !== this) {
+                    cb.checked = false;
+                }
+            });
+            if (this.checked) {
+                pricePerPage = parseFloat(this.closest('li').querySelector('span:nth-of-type(2)').textContent.replace('$', '').replace('/page', ''));
+            } else {
+                pricePerPage = 17.81; // Reset to default if none are checked
+            }
+            updateTotalPrice();
+        });
+    });
+
+    incrementButton.addEventListener('click', function() {
+        pageCountInput.value = parseInt(pageCountInput.value) + 1;
+        updateTotalPrice();
+    });
+
+    decrementButton.addEventListener('click', function() {
+        if (parseInt(pageCountInput.value) > 1) {
+            pageCountInput.value = parseInt(pageCountInput.value) - 1;
+            updateTotalPrice();
+        }
+    });
+
+    function updateTotalPrice() {
+        const pageCount = parseInt(pageCountInput.value);
+        const urgency = document.getElementById('urgency').value;
+        const totalPrice = pricePerPage * pageCount * getUrgencyMultiplier(urgency);
+        priceDisplay.textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+        document.getElementById('totalPriceInput').value = totalPrice.toFixed(2); // Update hidden input
+    }
+
+    function getUrgencyMultiplier(urgency) {
+        switch (urgency) {
+            case '3hours':
+                return 2.0;
+            case '6hours':
+                return 1.75;
+            case '12hours':
+                return 1.5;
+            case '1day':
+                return 1.4;
+            case '2days':
+                return 1.3;
+            case '3days':
+                return 1.2;
+            case '7days':
+                return 1.15;
+            case '14days':
+                return 1.1;
+            case '21days':
+                return 1.05;
+            default:
+                return 1.0;
+        }
+    }
+
+    // Ensure urgency dropdown triggers updateTotalPrice when changed
+    document.getElementById('urgency').addEventListener('change', updateTotalPrice);
+
+    updateTotalPrice(); // Initial calculation
+});
+
+function changePageCount(delta) {
+    const pageCountInput = document.getElementById('pageCount');
+    let pageCount = parseInt(pageCountInput.value) || 1;
+    pageCount = Math.max(1, pageCount + delta);
+    pageCountInput.value = pageCount;
+    updateSummary();
+}
+
+function calculateTotalPrice(serviceType, paperType, subjectArea, references, academicLevel, pageCount, spacing, urgency, writerLevel, additionalServices) {
+    const basePrice = 12.99; // Base price per page
+    let totalPrice = basePrice * pageCount; // Calculate base total price
+
+    // Adjust for writer level
+    if (writerLevel === 'Premium') {
+        totalPrice *= 1.25; // Add 25% for premium
+    } else if (writerLevel === 'Top10') {
+        totalPrice *= 1.35; // Add 35% for top 10
+    }
+
+    // Adjust for urgency
+    const urgencyMultiplier = getUrgencyMultiplier(urgency);
+    totalPrice *= urgencyMultiplier;
+
+    return totalPrice;
+}
+
+function getUrgencyMultiplier(deadline) {
+    switch (deadline) {
+        case '3hours':
+            return 2.0;
+        case '6hours':
+            return 1.75;
+        case '12hours':
+            return 1.5;
+        case '1day':
+            return 1.4;
+        case '2days':
+            return 1.3;
+        case '3days':
+            return 1.2;
+        case '7days':
+            return 1.15;
+        case '14days':
+            return 1.1;
+        case '21days':
+            return 1.05;
+        default:
+            return 1.0;
+    }
+}
+
+function updateSummary() {
+    const serviceType = document.getElementById('serviceType').value;
+    const paperType = document.getElementById('paperType').value;
+    const subjectArea = document.getElementById('subjectArea').value;
+    const topic = document.getElementById('topic').value;
+    const paperDetails = document.getElementById('paperDetails').value;
+    const paperFormat = document.querySelector('input[name="paperFormat"]:checked').value;
+    const references = document.getElementById('references').value;
+    const academicLevel = document.querySelector('input[name="academicLevel"]:checked').value;
+    const pageCount = document.getElementById('pageCount').value;
+    const spacing = document.querySelector('input[name="spacing"]:checked').value;
+    const urgency = document.getElementById('urgency').value;
+    const writerLevel = document.querySelector('input[name="writerLevel"]:checked').value;
+    const additionalInstructions = document.getElementById('additionalInstructions').value;
+    const additionalServices = Array.from(document.querySelectorAll('input[name="additionalServices"]:checked')).map(el => el.value);
+    const notifications = Array.from(document.querySelectorAll('input[name="notifications"]:checked')).map(el => el.value);
+    const email = document.getElementById('email').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const fullName = document.getElementById('fullName').value;
+    const preferredContactMethod = document.getElementById('preferredContactMethod').value;
+    const timezone = document.getElementById('timezone').value;
+
+    // Calculate total price based on form values
+    let totalPrice = calculateTotalPrice(serviceType, paperType, subjectArea, references, academicLevel, pageCount, spacing, urgency, writerLevel, additionalServices);
+
+    // Update the total price in the summary
+    document.getElementById('totalPriceSummary').textContent = `$${totalPrice.toFixed(2)}`;
+    document.getElementById('totalPrice').textContent = `$${totalPrice.toFixed(2)}`;
+    document.getElementById('totalPriceInput').value = totalPrice.toFixed(2); // Update hidden input
+
+    // Update order summary list
+    const orderSummaryList = document.getElementById('orderSummaryList');
+    orderSummaryList.innerHTML = `
+        <li>Service Type: ${serviceType}</li>
+        <li>Paper Type: ${paperType}</li>
+        <li>Subject Area: ${subjectArea}</li>
+        <li>Topic: ${topic}</li>
+        <li>Paper Details: ${paperDetails}</li>
+        <li>Paper Format: ${paperFormat}</li>
+        <li>References: ${references}</li>
+        <li>Academic Level: ${academicLevel}</li>
+        <li>Page Count: ${pageCount}</li>
+        <li>Spacing: ${spacing}</li>
+        <li>Urgency: ${urgency}</li>
+        <li>Writer Level: ${writerLevel}</li>
+        <li>Additional Instructions: ${additionalInstructions}</li>
+        <li>Additional Services: ${additionalServices.join(', ')}</li>
+        <li>Notifications: ${notifications.join(', ')}</li>
+        <li>Email: ${email}</li>
+        <li>Phone Number: ${phoneNumber}</li>
+        <li>Full Name: ${fullName}</li>
+        <li>Preferred Contact Method: ${preferredContactMethod}</li>
+        <li>Timezone: ${timezone}</li>
+    `;
+}
+
+// Add event listeners to relevant form elements to update the summary when changed
+document.querySelectorAll('#serviceType, #paperType, #subjectArea, #topic, #paperDetails, input[name="paperFormat"], #references, input[name="academicLevel"], #pageCount, input[name="spacing"], #urgency, input[name="writerLevel"], #additionalInstructions, input[name="additionalServices"], input[name="notifications"], #email, #phoneNumber, #fullName, #preferredContactMethod, #timezone').forEach(element => {
+    element.addEventListener('change', updateSummary);
+    element.addEventListener('input', updateSummary);
+});
+
+// Initial summary update
+updateSummary();
+
+
+
+</script>
+<%- include('partials/footer') %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const express = require('express');
+const router = express.Router();
+const Order = require('../models/Order'); // Ensure this path is correct
+const User = require('../models/user'); // Ensure this path is correct
+
+// Middleware to generate unique Order ID
+const generateOrderId = async () => {
+    const lastOrder = await Order.findOne().sort({ createdAt: -1 });
+    const newOrderIdNumber = lastOrder ? parseInt(lastOrder.orderId.split(' ')[2]) + 1 : 1;
+    return `Order ID: ${newOrderIdNumber.toString().padStart(3, '0')}`;
+};
+
+// Handle order submission
+router.post('/', async (req, res) => {
+    console.log(req.body); // Debug: Print the form data
+    const { serviceType, paperType, subjectArea, topic, paperDetails, paperFormat, references, academicLevel, pageCount, spacing, urgency, writerLevel, additionalInstructions, additionalServices, notifications, email, phoneNumber, fullName, preferredContactMethod, timezone, totalPrice } = req.body;
+    const userId = req.session.userId;
+
+    if (!userId) {
+        return res.redirect('/login');
+    }
+
+    try {
+        const orderId = await generateOrderId();
+        const newOrder = new Order({
+            orderId,
+            userId,
+            serviceType,
+            paperType,
+            subjectArea,
+            topic,
+            paperDetails,
+            paperFormat,
+            references,
+            academicLevel,
+            pageCount,
+            spacing,
+            urgency,
+            writerLevel,
+            additionalInstructions,
+            additionalServices,
+            notifications,
+            email,
+            phoneNumber,
+            fullName,
+            preferredContactMethod,
+            timezone,
+            price: totalPrice, // Ensure this field matches
+            status: 'Pending',
+            additionalMaterials: req.body.additionalMaterials || []
+        });
+
+        await newOrder.save();
+
+        res.redirect('/customer');
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+module.exports = router;
+
+
+
+
+
+
+
+const mongoose = require('mongoose');
+
+const orderSchema = new mongoose.Schema({
+    orderId: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    serviceType: String,
+    paperType: String,
+    subjectArea: String,
+    topic: String,
+    paperDetails: String,
+    paperFormat: String,
+    references: Number,
+    academicLevel: String,
+    pageCount: Number,
+    spacing: String,
+    urgency: String,
+    writerLevel: String,
+    additionalInstructions: String,
+    additionalServices: [String],
+    notifications: [String],
+    email: String,
+    phoneNumber: String,
+    fullName: String,
+    preferredContactMethod: String,
+    timezone: String,
+    price: Number,
+    status: {
+        type: String,
+        default: 'Pending'
+    },
+    additionalMaterials: {
+        type: [String],
+        default: []
+    }
+}, { timestamps: true });
+
+const Order = mongoose.model('Order', orderSchema);
+
+module.exports = Order;
+
+
+
+require('dotenv').config();
+const express = require('express');
+const path = require('path');
+const axios = require('axios');
+const bodyParser = require('body-parser');
+const moment = require('moment');
+const cors = require('cors');
+const fs = require('fs');
+const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+const authRoutes = require('./routes/auth');
+const orderRoutes = require('./routes/order');
+const customerRoutes = require('./routes/customer');
+const adminRoutes = require('./routes/admin');
+const protect = require('./middleware/auth');
+const isAdmin = require('./middleware/admin');
+
+
+const app = express();
+const port = process.env.PORT || 3000;
+const hostname = 'localhost';
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI })
+  }));
+
+
+  
+app.use('/api/auth', authRoutes);
+
+// Middleware to make the session available to templates
+app.use((req, res, next) => {
+    res.locals.user = req.session.userId ? req.session.userId : null;
+    next();
+  });
+
+  app.use('/api/auth', authRoutes);
+  app.use('/order', orderRoutes);
+  app.use('/', customerRoutes);
+  app.use('/', adminRoutes);
+  
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname, 'public')));
+
+const consumer_key = process.env.CONSUMER_KEY;
+const consumer_secret = process.env.CONSUMER_SECRET;
+const shortCode = process.env.SHORT_CODE;
+const passkey = process.env.PASSKEY;
+const callbackURL = process.env.CALLBACK_URL || 'https://3431-154-159-237-132.ngrok-free.app/callback';
+const validationURL = process.env.VALIDATION_URL || 'https://3431-154-159-237-132.ngrok-free.app/validation';
+
+async function getAccessToken() {
+  const url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
+  const auth = 'Basic ' + Buffer.from(consumer_key + ':' + consumer_secret).toString('base64');
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: auth,
+      },
+    });
+    return response.data.access_token;
+  } catch (error) {
+    console.error('Error getting access token:', error.response ? error.response.data : error.message);
+    throw error;
+  }
+}
+
+app.post('/stkpush', async (req, res) => {
+    const { phoneNumber, amount } = req.body;
+
+    if (!phoneNumber || !amount) {
+        return res.status(400).send({ message: 'Phone number and amount are required' });
+    }
+
+    // Validate that amount is a valid number
+    const amountInKES = parseInt(amount, 10);
+    if (isNaN(amountInKES) || amountInKES <= 0) {
+        return res.status(400).send({ message: 'Invalid amount' });
+    }
+
+    try {
+        const accessToken = await getAccessToken();
+        const url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+        const auth = 'Bearer ' + accessToken;
+        const timestamp = moment().format('YYYYMMDDHHmmss');
+        const password = Buffer.from(shortCode + passkey + timestamp).toString('base64');
+
+        const response = await axios.post(url, {
+            BusinessShortCode: shortCode,
+            Password: password,
+            Timestamp: timestamp,
+            TransactionType: 'CustomerPayBillOnline',
+            Amount: amount, // Use the dynamic amount
+            PartyA: phoneNumber,
+            PartyB: shortCode,
+            PhoneNumber: phoneNumber,
+            CallBackURL: callbackURL,
+            AccountReference: 'Writers cash',
+            TransactionDesc: 'Payment for goods',
+        }, {
+            headers: {
+                Authorization: auth,
+            },
+        });
+
+        res.status(200).send({ message: 'Request successful' });
+    } catch (error) {
+        console.error('Error in /stkpush route:', error.response ? error.response.data : error.message);
+        res.status(500).send({ message: 'Request failed' });
+    }
+});
+
+
+
+app.post('/callback', (req, res) => {
+    console.log('STK PUSH CALLBACK');
+    const CheckoutRequestID = req.body.Body.stkCallback.CheckoutRequestID;
+    const ResultCode = req.body.Body.stkCallback.ResultCode;
+    var json = JSON.stringify(req.body);
+    fs.writeFile('stkcallback.json', json, 'utf8', function (err) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log('STK PUSH CALLBACK JSON FILE SAVED');
+    });
+    console.log(req.body);
+    res.status(200).send('Callback received');
+})
+
+
+// Additional Routes
+app.get('/', (req, res) => res.render('index'));
+app.get('/order', protect, (req, res) => res.render('order'));
+app.get('/pricing', (req, res) => res.render('pricing'));
+app.get('/review', protect, (req, res) => res.render('review'));
+app.get('/sample', (req, res) => res.render('sample'));
+app.get('/login', (req, res) => res.render('login'));
+app.get('/customer', protect, (req, res) => res.render('customer'));
+app.get('/dashboard', protect, isAdmin, (req, res) => {
+  res.render('dashboard'); // Assuming you have a dashboard.ejs template
+});
+app.get('/paypal-client-id', (req, res) => {
+    const clientId = process.env.PAYPAL_CLIENT_ID;
+    res.json({ clientId });
+});
+
+
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.log(err));
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server is running on http://${hostname}:${port}`);
+});
+
+
+/*
+const paypal = require('./paypalConfig'); // Import your PayPal config
+const bodyParser = require('body-parser');
+require('dotenv').config();
+app.post('/pay', async (req, res) => {
+    try {
+        // Call a function to generate PayPal order and get approval URL
+        const url = await paypal.createOrder(); // Adjust this as per your actual implementation
+
+        // Assuming paypal.createOrder() returns the approval URL
+        res.status(200).send(url); // Send approval URL to client
+    } catch (error) {
+        console.error('Error creating PayPal order:', error);
+        res.status(500).send('Failed to initiate payment'); // Handle error response
+    }
+});
+
+app.get('/complete-order', async (req, res) => {
+    try {
+        const { token } = req.query;
+        if (!token) {
+            throw new Error('Missing token parameter');
+        }
+
+        // Assuming your PayPal configuration includes a function to capture the payment
+        await paypal.capturePayment(token);
+
+        res.send('Course purchased successfully');
+    } catch (error) {
+        res.status(500).send('Error completing order: ' + error.message);
+    }
+});
+
+// Route for canceling the order
+app.get('/cancel-order', (req, res) => {
+    res.redirect('/');
+}); */

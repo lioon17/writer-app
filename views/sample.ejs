@@ -1,0 +1,134 @@
+<%- include('partials/header') %>
+
+<div class="container-samples">
+    <div class="hs">
+        <h1>Samples of our work</h1>
+        <p>At Canadian Writings, we believe in complete transparency and providing our customers with a clear understanding of the quality work we deliver. That's why we've compiled a selection of sample papers crafted by our expert writers across various subjects and academic levels.</p>
+    </div>
+    <div class="samples-and-calculator">
+        <div class="samples">
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>The Pleistocene Megafauna’s Extinction in North America</p>
+                <p><strong>Pages:</strong> 11</p>
+                <p><strong>Urgency:</strong> 5 days</p>
+                <a href="pdf/KVB HUMAN RESOURCE MANUAL - JULY 2018-FINAL (1).pdf" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>3PL and 4PL Suppliers in North America</p>
+                <p><strong>Pages:</strong> 10</p>
+                <p><strong>Urgency:</strong> 14 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Coursework:</h2>
+                <p>Interaction of the English settlers and the Native Americans</p>
+                <p><strong>Pages:</strong> 3</p>
+                <p><strong>Urgency:</strong> 3 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>Macronutrients</p>
+                <p><strong>Pages:</strong> 4</p>
+                <p><strong>Urgency:</strong> 14 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>The Pleistocene Megafauna’s Extinction in North America</p>
+                <p><strong>Pages:</strong> 11</p>
+                <p><strong>Urgency:</strong> 5 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Essay:</h2>
+                <p>Upper Class and Working Class</p>
+                <p><strong>Pages:</strong> 2</p>
+                <p><strong>Urgency:</strong> 24 hours</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Research Paper:</h2>
+                <p>Compensation Plans for Private Sector CEOs in North America</p>
+                <p><strong>Pages:</strong> 6</p>
+                <p><strong>Urgency:</strong> 7 days</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+            <div class="sample">
+                <h2>Essay:</h2>
+                <p>Philosophy: Definition of Ethics</p>
+                <p><strong>Pages:</strong> 3</p>
+                <p><strong>Urgency:</strong> 48 hours</p>
+                <a href="" download="sample.pdf">
+                    <button>Download sample</button>
+                </a>
+            </div>
+        </div>
+        <div class="calculator">
+            <h2>Calculate the price of your order:</h2>
+            <form id="calculatorForm">
+                <label for="service">Academic paper writing</label>
+                <select id="service">
+                    <option value="essay">Write My Essay</option>
+                    <option value="research-paper">Research Paper Writing Service</option>
+                    <option value="write-paper">Write My Paper</option>
+                    <option value="term-paper">Term Paper Writing Service</option>
+                    <option value="college-paper">College Paper Writing Service</option>
+                    <option value="dissertation">Dissertation</option>
+                    <option value="thesis">Thesis</option>
+                    <option value="course-work">Coursework</option>
+                    <option value="book-report">Book Report</option>
+                </select>
+                <label for="level">Academic Level</label>
+                <select id="level">
+                    <option value="high-school">High School</option>
+                    <option value="freshman">Freshman</option>
+                    <option value="sophomore">Sophomore</option>
+                    <option value="junior">Junior</option>
+                    <option value="masters">Masters</option>
+                </select>
+                <label for="pages">Number of pages</label>
+                <input type="number" id="pages" value="1" min="1">
+                <label for="deadline">Deadline</label>
+                <input type="date" id="deadline" value="2024-06-28">
+                <div class="total-price">Total price: <span id="totalPrice">$12.99</span></div>
+                <button type="button" class="order-now" onclick="storeFormData()">Order Now</button>
+            </form>
+        </div> 
+    </div>
+    <div class="cta">
+        <h2>Get professional writing help!</h2>
+        <p>Don't worry, our experts handle any type of research projects!</p>
+        <button onclick="window.location.href='/order';">Order now</button>
+    </div>
+  
+</div>
+
+  <!-- Modal -->
+  <div id="sampleModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalBody"></div>
+    </div>
+</div>
+<script>
+   
+</script>
+<%- include('partials/footer') %>

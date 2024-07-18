@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i>
+            <div class="title">WritersBlock</div>
+            <div class="profile">
+                <div class="profile-info">
+                    <span>Admin</span>
+                    <span>ID: 12345</span>
+                </div>
+                <img src="https://via.placeholder.com/40" alt="Admin">
+            </div>
+        </div>
+        <div class="dashboard-main">
+            <div class="dashboard-sidebar">
+                <ul class="dashboard-menu">
+                    <li><a href="#" onclick="showSection('available-orders')" class="active"><i class="fas fa-clipboard-list"></i> Available Orders</a></li>
+                    <li><a href="#" onclick="showSection('my-stats')"><i class="fas fa-chart-line"></i> My Stats</a></li>
+                    <li><a href="#" onclick="showSection('transactions')"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                </ul>
+            </div>
+            <div class="dashboard-sidebar-hidden hidden">
+                <ul class="dashboard-menu">
+                    <li><a href="#" onclick="showSection('available-orders')" class="active"><i class="fas fa-clipboard-list"></i> Available Orders</a></li>
+                    <li><a href="#" onclick="showSection('my-stats')"><i class="fas fa-chart-line"></i> My Stats</a></li>
+                    <li><a href="#" onclick="showSection('transactions')"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                </ul>
+            </div>
+            <div id="available-orders" class="dashboard-content active">
+                <div class="dashboard-content-header">
+                    <h2>Available Orders</h2>
+                </div>
+                <div class="dashboard-orders">
+                    <% if (orders && orders.length > 0) { %>
+                        <% orders.forEach(order => { %>
+                            <div class="order-card" data-order-id="<%= order.orderId %>">
+                                <div class="order-summary">
+                                    <h3>Order ID: <%= order.orderId %></h3>
+                                    <p><strong>Customer:</strong> <%= order.fullName %></p>
+                                    <p><strong>Date:</strong> <%= new Date(order.createdAt).toDateString() %></p>
+                                    <p><strong>Total:</strong> $<%= order.totalPrice %></p>
+                                </div>
+                                <div id="order-details-<%= order.orderId %>" class="order-full-details hidden">
+                                    <p>Service Type: <%= order.serviceType %></p>
+                                    <p>Paper Type: <%= order.paperType %></p>
+                                    <p>Subject Area: <%= order.subjectArea %></p>
+                                    <p>Topic: <%= order.topic %></p>
+                                    <p>Details: <%= order.paperDetails %></p>
+                                    <p>Format: <%= order.paperFormat %></p>
+                                    <p>References: <%= order.references %></p>
+                                    <p>Academic Level: <%= order.academicLevel %></p>
+                                    <p>Pages: <%= order.pageCount %></p>
+                                    <p>Spacing: <%= order.spacing %></p>
+                                    <p>Urgency: <%= order.urgency %></p>
+                                    <p>Writer Level: <%= order.writerLevel %></p>
+                                    <p>Additional Instructions: <%= order.additionalInstructions %></p>
+                                    <p>Services: <%= order.additionalServices.join(', ') %></p>
+                                    <p>Notifications: <%= order.notifications.join(', ') %></p>
+                                    <p>Email: <%= order.email %></p>
+                                    <p>Phone Number: <%= order.phoneNumber %></p>
+                                    <p>Full Name: <%= order.fullName %></p>
+                                    <p>Contact Method: <%= order.preferredContactMethod %></p>
+                                    <p>Timezone: <%= order.timezone %></p>
+                                    <p>Status: <%= order.status %></p>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>No orders available</p>
+                    <% } %>
+                </div> 
+            </div>
+            <!-- My Stats and Transactions sections omitted for brevity -->
+            <div id="my-stats" class="dashboard-content">
+                <div class="dashboard-content-header">
+                    <h2>My Stats</h2>
+                    <div class="dashboard-tabs">
+                        <button class="active">Stats</button>
+                        <button>Loyalty stats</button>
+                    </div>
+                </div>
+                <div class="dashboard-stats">
+                    <div class="dashboard-stat-card">
+                        <p><strong>4890</strong></p>
+                        <p>Total orders completed</p>
+                    </div>
+                    <div class="dashboard-stat-card">
+                        <p><strong>$171,290.78</strong></p>
+                        <p>Income earned</p>
+                    </div>
+                    <div class="dashboard-stat-card">
+                        <p><strong>8.66</strong></p>
+                        <p>Subjects average customer feedback</p>
+                    </div>
+                    <div class="dashboard-stat-card">
+                        <p>Click for details</p>
+                    </div>
+                </div>
+                <h3>My subjects (1 year stats)</h3>
+                <div class="dashboard-subjects">
+                    <div class="dashboard-subject-card">
+                        <div class="dashboard-header">
+                            <p><strong>Education</strong></p>
+                            <span class="dashboard-badge">Premium writer</span>
+                        </div>
+                        <p>9.83 Average customer feedback</p>
+                        <p>181 Orders completed</p>
+                    </div>
+                    <div class="dashboard-subject-card">
+                        <div class="dashboard-header">
+                            <p><strong>Mathematics</strong></p>
+                            <span class="dashboard-badge senior">Senior advanced writer</span>
+                        </div>
+                        <p>10 Average customer feedback</p>
+                        <p>11 Orders completed</p>
+                    </div>
+                    <div class="dashboard-subject-card">
+                        <div class="dashboard-header">
+                            <p><strong>Macro and Micro economics</strong></p>
+                            <span class="dashboard-badge advanced">Advanced writer</span>
+                        </div>
+                        <p>8 Average customer feedback</p>
+                        <p>9 Orders completed</p>
+                    </div>
+                </div>
+            </div>
+            <div id="transactions" class="dashboard-content">
+                <div class="dashboard-content-header">
+                    <h2>Transactions</h2>
+                </div>
+                <div class="transactions-search-box">
+                    <input type="text" placeholder="Search Phone">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="transactions-table-container">
+                    <table class="transactions-table">
+                        <thead>
+                            <tr>
+                                <th>Ref Code</th>
+                                <th>Number</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>SG72X6ZV1Q</td>
+                                <td>254797965494</td>
+                                <td>10</td>
+                                <td>7/7/2024, 9:29:10 PM</td>
+                            </tr>
+                            <tr>
+                                <td>SG77X6ZWYR</td>
+                                <td>254114532527</td>
+                                <td>10</td>
+                                <td>7/7/2024, 9:29:08 PM</td>
+                            </tr>
+                            <tr>
+                                <td>SG73X6W7M3</td>
+                                <td>254759811842</td>
+                                <td>10</td>
+                                <td>7/7/2024, 9:28:14 PM</td>
+                            </tr>
+                            <tr>
+                                <td>SG72X6VTF8</td>
+                                <td>254757107406</td>
+                                <td>10</td>
+                                <td>7/7/2024, 9:28:11 PM</td>
+                            </tr>
+                            <tr>
+                                <td>SG73X6U9MN</td>
+                                <td>254722885848</td>
+                                <td>39</td>
+                                <td>7/7/2024, 9:27:47 PM</td>
+                            </tr>
+                            <tr>
+                                <td>SG73X6SF9R</td>
+                                <td>254798438253</td>
+                                <td>10</td>
+                                <td>7/7/2024, 9:27:17 PM</td>
+                            </tr>
+                            <tr>
+                                <td>SG77X6P23D</td>
+                                <td>kdumm</td>
+                                <td>2000</td>
+                                <td>7/7/2024, 9:26:29 PM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function toggleSidebar() {
+            const sidebarHidden = document.querySelector('.dashboard-sidebar-hidden');
+            sidebarHidden.classList.toggle('show');
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.dashboard-content').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.querySelectorAll('.dashboard-sidebar .dashboard-menu a, .dashboard-sidebar-hidden .dashboard-menu a').forEach(menuItem => {
+                menuItem.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            document.querySelector(`.dashboard-sidebar .dashboard-menu a[onclick="showSection('${sectionId}')"], .dashboard-sidebar-hidden .dashboard-menu a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+
+            const sidebarHidden = document.querySelector('.dashboard-sidebar-hidden');
+            if (window.innerWidth <= 768) {
+                sidebarHidden.classList.remove('show');
+            }
+        }
+
+        function toggleOrderDetails(orderId) {
+            const details = document.getElementById('order-details-' + orderId);
+            if (details) {
+                details.classList.toggle('hidden');
+                details.classList.toggle('visible');
+            }
+        }
+
+        // Add event listeners to order cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderCards = document.querySelectorAll('.order-card');
+            orderCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const orderId = card.getAttribute('data-order-id');
+                    toggleOrderDetails(orderId);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

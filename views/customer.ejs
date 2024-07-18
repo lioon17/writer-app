@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="orders-container">
+        <div class="orders-sidebar">
+            <div class="orders-sidebar-header">
+                <a href="/">
+                    <h1>WritersBlock</h1>
+                </a> 
+                <% if (user && user.username) { %>
+                    <p>Welcome back, <%= user.username %>!</p>
+                <% } else { %>
+                    <p>Welcome back!</p>
+                <% } %>
+            </div>
+            <div class="orders-sidebar-menu">
+                <ul>
+                    <li><a href="/order"><i class="fas fa-plus"></i> New Order</a></li>
+                    <li><a href="#" onclick="showSection('orders')"><i class="fas fa-shopping-cart"></i>My Orders</a></li>
+                    <li><a href="#" onclick="showSection('feedback')"><i class="fas fa-comments"></i>Feedback</a></li>
+                    <li><a href="#" onclick="showSection('referral')"><i class="fas fa-user-plus"></i>Referral</a></li>
+                    <li><a href="#" onclick="showSection('settings-section')"><i class="fas fa-cog"></i>Settings</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="orders-main-content">
+            <div class="orders-main-header">
+                <div class="orders-header-left">
+                    <a href="#">Dashboard</a>
+                    <a href="#">Profile</a>
+                </div>
+                <div class="orders-header-right">
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-user"></i>
+                    <img class="orders-profile-picture" src="https://via.placeholder.com/40" alt="Profile Picture">
+                </div>
+            </div>
+            <div id="orders" class="orders-content-section active">
+                <div class="orders-section">
+                    <h2>My Orders</h2>
+                    <div class="orders-tabs">
+                        <button class="orders-tab-button active" onclick="showTab('all-orders')">All Orders</button>
+                        <button class="orders-tab-button" onclick="showTab('pending-orders')">Pending Payment</button>
+                    </div>
+                  
+                    <div id="all-orders" class="orders-tab-content active">
+                        <% if (orders && orders.length > 0) { %>
+                            <% orders.forEach(order => { %>
+                                <div class="order-card" onclick="toggleOrderDetails('<%= order._id %>')">
+                                    <div class="order-summary">
+                                        <p>Order ID: <%= order.orderId %></p>
+                                        <p>Urgency: <%= order.urgency %></p>
+                                        <p>Pages: <%= order.pageCount %></p>
+                                        <p>Price: $<%= order.totalPrice %></p>
+                                       
+                                      <!-- <div class="order-status">
+                                            <% if (order.paymentStatus === 'NOT PAID') { %>
+                                                <span class="status-tag not-paid">NOT PAID</span>
+                                                <button class="pay-button">$<%= order.totalPrice %></button>
+                                            <% } else { %>
+                                                <span class="status-tag paid">PAID</span>
+                                            <% } %>
+                                        </div>--> 
+                                    </div>
+                                    <div id="order-details-<%= order._id %>" class="order-full-details hidden">
+                                        <p>Service Type: <%= order.serviceType %></p>
+                                        <p>Paper Type: <%= order.paperType %></p>
+                                        <p>Subject Area: <%= order.subjectArea %></p>
+                                        <p>Topic: <%= order.topic %></p>
+                                        <p>Details: <%= order.paperDetails %></p>
+                                        <p>References: <%= order.references %></p>
+                                        <p>Academic Level: <%= order.academicLevel %></p>
+                                        <p>Format: <%= order.paperFormat %></p>
+                                        <p>Spacing: <%= order.spacing %></p>
+                                        <p>Writer Level: <%= order.writerLevel %></p>
+                                        <p>Additional Instructions: <%= order.additionalInstructions %></p>
+                                        <p>Services: <%= order.additionalServices.join(', ') %></p>
+                                        <p>Notifications: <%= order.notifications.join(', ') %></p>
+                                        <p>Email: <%= order.email %></p>
+                                        <p>Phone Number: <%= order.phoneNumber %></p>
+                                        <p>Contact Method: <%= order.preferredContactMethod %></p>
+                                        <p>Timezone: <%= order.timezone %></p>
+                                        <p>Status: <%= order.status %></p>
+                                        <div>
+                                            <p>Additional Materials:</p>
+                                            <ul>
+                                                <% order.files.forEach(material => { %>
+                                                    <li><a href="uploads/<%= material %>" target="_blank"><%= material %></a></li>
+                                                <% }) %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No orders found.</p>
+                        <% } %>
+                    </div>
+
+                    <div id="pending-orders" class="orders-tab-content">
+                        <% if (orders && orders.length > 0) { %>
+                            <% orders.filter(order => order.paymentStatus === 'NOT PAID').forEach(order => { %>
+                                <div class="order-card" onclick="toggleOrderDetails('<%= order._id %>')">
+                                    <div class="order-summary">
+                                        <p>Order ID: <%= order.orderId %></p>
+                                        <p>Urgency: <%= order.urgency %></p>
+                                        <p>Pages: <%= order.pageCount %></p>
+                                        <p>Price: $<%= order.totalPrice %></p>
+                                      
+                                     <!--  <div class="order-status">
+                                            <span class="status-tag not-paid">NOT PAID</span>
+                                            <button class="pay-button">$<%= order.totalPrice %></button>
+                                        </div>--> 
+                                    </div>
+                                    <div id="order-details-<%= order._id %>" class="order-full-details hidden">
+                                        <p>Service Type: <%= order.serviceType %></p>
+                                        <p>Paper Type: <%= order.paperType %></p>
+                                        <p>Subject Area: <%= order.subjectArea %></p>
+                                        <p>Topic: <%= order.topic %></p>
+                                        <p>Details: <%= order.paperDetails %></p>
+                                        <p>References: <%= order.references %></p>
+                                        <p>Academic Level: <%= order.academicLevel %></p>
+                                        <p>Format: <%= order.paperFormat %></p>
+                                        <p>Spacing: <%= order.spacing %></p>
+                                        <p>Writer Level: <%= order.writerLevel %></p>
+                                        <p>Additional Instructions: <%= order.additionalInstructions %></p>
+                                        <p>Services: <%= order.additionalServices.join(', ') %></p>
+                                        <p>Notifications: <%= order.notifications.join(', ') %></p>
+                                        <p>Email: <%= order.email %></p>
+                                        <p>Phone Number: <%= order.phoneNumber %></p>
+                                        <p>Contact Method: <%= order.preferredContactMethod %></p>
+                                        <p>Timezone: <%= order.timezone %></p>
+                                        <p>Status: <%= order.status %></p>
+                                        <div>
+                                            <p>Additional Materials:</p>
+                                            <ul>
+                                                <% order.files.forEach(material => { %>
+                                                    <li><a href="uploads/<%= material %>" target="_blank"><%= material %></a></li>
+                                                <% }) %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No pending orders found.</p>
+                        <% } %>
+                    </div>
+        
+                    <div id="feedback" class="orders-content-section">
+                        <div class="feedback-section">
+                            <h2>Feedback</h2>
+                            <div class="feedback-table-wrapper">
+                                <table class="feedback-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Feedback</th>
+                                            <th>Rating</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>001</td>
+                                            <td>Great service!</td>
+                                            <td>5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>002</td>
+                                            <td>Good quality.</td>
+                                            <td>4</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="no-feedback">
+                                <i class="fas fa-info-circle"></i>
+                                <p>No feedback yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="referral" class="orders-content-section">
+                        <div class="referral-section">
+                            <h2>Referral Program</h2>
+                            <p>Invite your friends and get rewards!</p>
+                            <div class="referral-link">
+                                <input type="text" value="https://example.com/referral" readonly>
+                                <button onclick="copyReferralLink()">Copy</button>
+                            </div>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                            <div class="referral-code">
+                                Your referral code: <strong>ABC123</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <section class="orders-content-section" id="settings-section">
+                        <h2>My Settings</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="profile-id">Profile ID</label>
+                                <input type="text" id="profile-id" value="142-801454" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="timezone">Time Zone</label>
+                                <input type="text" id="timezone" value="(GMT+03:00) Nairobi" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone-number">Phone Number</label>
+                                <input type="text" id="phone-number" value="+254 01*****649" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="current-email">Current Email</label>
+                                <input type="email" id="current-email" value="*******22@gmail.com" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-email">New Email</label>
+                                <input type="email" id="new-email" placeholder="Enter new email">
+                                <button type="button">Save Changes</button>
+                            </div>
+                            <div class="form-group">
+                                <label for="current-password">Current Password</label>
+                                <input type="password" id="current-password" placeholder="Enter current password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" placeholder="Enter new password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm New Password</label>
+                                <input type="password" id="confirm-password" placeholder="Confirm new password">
+                                <button type="button">Save Changes</button>
+                            </div>
+                            <div class="form-group notification-settings">
+                                <label><input type="checkbox" checked> Credit balance</label>
+                                <label><input type="checkbox" checked> Latest order updates</label>
+                                <label><input type="checkbox"> Payment required</label>
+                                <label><input type="checkbox" checked> New message</label>
+                                <label><input type="checkbox" checked> Order notifications</label>
+                            </div>
+                            <button type="button">Save Changes</button>
+                            <div class="form-group">
+                                <button type="button">Download Personal Data</button>
+                                <button type="button">Delete Personal Data</button>
+                            </div>
+    </form>
+</section>
+</div>
+
+</div>
+
+
+    </div>
+    </div>
+
+    <script>
+        function toggleOrderDetails(orderId) {
+            var detailsDiv = document.getElementById('order-details-' + orderId);
+            if (detailsDiv.classList.contains('hidden')) {
+                detailsDiv.classList.remove('hidden');
+                detailsDiv.classList.add('visible');
+            } else {
+                detailsDiv.classList.remove('visible');
+                detailsDiv.classList.add('hidden');
+            }
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.orders-content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.orders-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.orders-tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
+
+        <!---    <div id="pending-orders" class="orders-tab-content">
+                <div class="order-card">
+                    <div class="order-details">
+                        <p>Order ID: 002</p>
+                        <p>Date: 2023-07-02</p>
+                        <p>Total: $50</p>
+                    </div>
+                    <div class="order-status">
+                        <span class="status-tag not-paid">Not Paid</span>
+                        <button class="pay-button">Pay Now</button>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+    <div id="feedback" class="orders-content-section">
+        <div class="feedback-section">
+            <h2>Feedback</h2>
+            <div class="feedback-table-wrapper">
+                <table class="feedback-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Feedback</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Great service!</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Good quality.</td>
+                            <td>4</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="no-feedback">
+                <i class="fas fa-info-circle"></i>
+                <p>No feedback yet.</p>
+            </div>
+        </div>
+    </div>
+    <div id="referral" class="orders-content-section">
+        <div class="referral-section">
+            <h2>Referral Program</h2>
+            <p>Invite your friends and get rewards!</p>
+            <div class="referral-link">
+                <input type="text" value="https://example.com/referral" readonly>
+                <button onclick="copyReferralLink()">Copy</button>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="referral-code">
+                Your referral code: <strong>ABC123</strong>
+            </div>
+        </div>
+    </div>
+    <section class="orders-content-section" id="settings-section">
+        <h2>My Settings</h2>
+        <form>
+            <div class="form-group">
+                <label for="profile-id">Profile ID</label>
+                <input type="text" id="profile-id" value="142-801454" readonly>
+            </div>
+            <div class="form-group">
+                <label for="timezone">Time Zone</label>
+                <input type="text" id="timezone" value="(GMT+03:00) Nairobi" readonly>
+            </div>
+            <div class="form-group">
+                <label for="phone-number">Phone Number</label>
+                <input type="text" id="phone-number" value="+254 01*****649" readonly>
+            </div>
+            <div class="form-group">
+                <label for="current-email">Current Email</label>
+                <input type="email" id="current-email" value="*******22@gmail.com" readonly>
+            </div>
+            <div class="form-group">
+                <label for="new-email">New Email</label>
+                <input type="email" id="new-email" placeholder="Enter new email">
+                <button type="button">Save Changes</button>
+            </div>
+            <div class="form-group">
+                <label for="current-password">Current Password</label>
+                <input type="password" id="current-password" placeholder="Enter current password">
+            </div>
+            <div class="form-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" placeholder="Enter new password">
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm New Password</label>
+                <input type="password" id="confirm-password" placeholder="Confirm new password">
+                <button type="button">Save Changes</button>
+            </div>
+            <div class="form-group notification-settings">
+                <label><input type="checkbox" checked> Credit balance</label>
+                <label><input type="checkbox" checked> Latest order updates</label>
+                <label><input type="checkbox"> Payment required</label>
+                <label><input type="checkbox" checked> New message</label>
+                <label><input type="checkbox" checked> Order notifications</label>
+            </div>
+            <button type="button">Save Changes</button>
+            <div class="form-group">
+                <button type="button">Download Personal Data</button>
+                <button type="button">Delete Personal Data</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+        </div>
+    </div>
+    <script>
+     
+function toggleOrderDetails(orderId) {
+    var detailsDiv = document.getElementById('order-details-' + orderId);
+    if (detailsDiv.classList.contains('hidden')) {
+        detailsDiv.classList.remove('hidden');
+        detailsDiv.classList.add('visible');
+    } else {
+        detailsDiv.classList.remove('visible');
+        detailsDiv.classList.add('hidden');
+    }
+}
+
+
+        
+        function showSection(sectionId) {
+            document.querySelectorAll('.orders-content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.orders-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.orders-tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
+-->  
+                    

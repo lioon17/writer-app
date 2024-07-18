@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <section class="login-container">
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        <span></span> <span></span> <span></span> <span></span> <span></span> <span></span>
+        
+        <div class="signin" id="login-form">
+            <div class="content">
+                <h2>Sign In</h2>
+                <div class="form">
+                    <div class="inputBox">
+                        <input type="text" id="login-email" required>
+                        <i>Email</i>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="login-password" required>
+                        <i>Password</i>
+                    </div>
+                    <div class="links">
+                        <a href="#">Forgot Password</a>
+                        <a href="#" onclick="switchForm('signup-form')">Signup</a>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" value="Login" onclick="loginUser()">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="signin" id="signup-form" style="display: none;">
+            <div class="content">
+                <h2>Sign Up</h2>
+                <div class="form">
+                    <div class="inputBox">
+                        <input type="text" id="signup-username" required>
+                        <i>Username</i>
+                    </div>
+                    <div class="inputBox">
+                        <input type="email" id="signup-email" required>
+                        <i>Email</i>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="signup-password" required>
+                        <i>Password</i>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" id="signup-confirm-password" required>
+                        <i>Confirm Password</i>
+                    </div>
+                    <div class="links">
+                        <a href="#" onclick="switchForm('login-form')">Login</a>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" value="Signup" onclick="registerUser()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        async function registerUser() {
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+    
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+    
+            const res = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, email, password })
+            });
+    
+            const data = await res.json();
+            if (res.status === 201) {
+                alert('Registration successful');
+                switchForm('login-form');
+            } else {
+                alert(data.message);
+            }
+        }
+    
+        async function loginUser() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+    
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+    
+            if (res.redirected) {
+                window.location.href = res.url;
+            } else {
+                const data = await res.json();
+                alert(data.message);
+            }
+        }
+    
+        async function logoutUser() {
+            const res = await fetch('/api/auth/logout', {
+                method: 'POST'
+            });
+    
+            if (res.redirected) {
+                window.location.href = res.url;
+            }
+        }
+    
+        function switchForm(formId) {
+            document.getElementById('login-form').style.display = formId === 'login-form' ? 'block' : 'none';
+            document.getElementById('signup-form').style.display = formId === 'signup-form' ? 'block' : 'none';
+        }
+    </script>
+    
+</body>
+</html>

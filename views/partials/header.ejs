@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Essay Writing Service</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+    <style>
+</style>
+</head>
+<body>
+
+
+    <header>
+
+        <div class="top-bar">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <div class="logo">WRITERS<span>BLOCK</span></div>
+              </a>
+            <nav>
+                <ul class="sidebar">
+                    <li onclick="closeSidebar()"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></a></li>
+                   <!--   <li class="dropdown"><a href="#">Services</a>
+                        <ul class="dropdown-content">
+                            <li class="dropdown-section">
+                                <h4>Writing Services</h4>
+                                <a href="#">Write My Essay</a>
+                                <a href="#">Research Paper Writing Service</a>
+                                <a href="#">Write My Paper</a>
+                                <a href="#">Term Paper Writing Service</a>
+                                <a href="#">College Paper Writing Service</a>
+                            </li>
+                            <li class="dropdown-section">
+                                <h4>Advanced Services</h4>
+                                <a href="#">Dissertation Writing Service</a>
+                                <a href="#">Thesis Writing Service</a>
+                                <a href="#">Coursework Writing Service</a>
+                                <a href="#">Book Report Writing Service</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li><a href="/pricing">Prices</a></li>
+                    <li><a href="/sample">Samples</a></li>
+                    <li><a href="/review">Reviews</a></li>
+                    <li class="dropdown"><a href="#">More</a>
+                        <ul class="dropdown-content">
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </li>
+                   
+                    <% if (user) { %>
+                        <li class="sidebar-account">
+                            <a href="/customer">My Account</a>
+                            <% if (user.role === 'admin') { %>
+                            <a href="/dashboard">Dashboard</a>
+                            <% } %>
+                        </li>
+                        <% } else { %>
+                        <li class="contact-info">
+                            <a href="/login">Login</a>
+                        </li>
+                        <% } %>
+                </ul>
+            
+                <ul>
+                    <!--  <li class="dropdown hideOnMobile"><a href="#">Services</a>
+                       <ul id="serviceDropdown" class="dropdown-content">
+                            <li class="dropdown-section">
+                                <h4>Writing Services</h4>
+                                <a href="#" data-service="essay">Write My Essay</a>
+                                <a href="#" data-service="research-paper">Research Paper Writing Service</a>
+                                <a href="#" data-service="write-paper">Write My Paper</a>
+                                <a href="#" data-service="term-paper">Term Paper Writing Service</a>
+                                <a href="#" data-service="college-paper">College Paper Writing Service</a>
+                            </li>
+                            <li class="dropdown-section">
+                                <h4>Advanced Services</h4>
+                                <a href="#" data-service="dissertation">Dissertation</a>
+                                <a href="#" data-service="thesis">Thesis</a>
+                                <a href="#" data-service="course-work">Coursework</a>
+                                <a href="#" data-service="book-report">Book Report</a>
+                            </li>
+                        </ul>
+                    </li>-->
+                    <li class="hideOnMobile"><a href="/pricing">Prices</a></li>
+                    <li class="hideOnMobile"><a href="/sample">Samples</a></li>
+                    <li class="hideOnMobile"><a href="/review">Reviews</a></li>
+                    <li class="dropdown hideOnMobile"><a href="#">More</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/contact us">Contact us</a></li>
+                            <li><a href="/contact us">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="contact-info">
+                        <% if (user) { %>
+                            <li class="contact-info hideOnMobile">
+                                <a href="/customer">My Account</a>
+                            </li>
+                            
+                            <% if (user.role === 'admin') { %>
+                                <li class="contact-info hideOnMobile">
+                                    <a href="/dashboard">Dashboard</a>
+                                </li>
+                            <% } %>
+
+                            <li class="contact-info">
+                                <form id="logout-form" action="/api/auth/logout" method="POST" style="display:inline;">
+                                    <button class="logout-button">Logout</button>
+                                </form>
+                            </li>
+                        <% } else { %>
+                            <li class="contact-info hideOnMobile"> 
+                                <a href="/login">Login</a>    
+                            </li>
+                            <li class="contact-info">
+                                <button class="order-now" onclick="redirectToOrderPage()">Order Now</button>
+                            </li>
+                        <% } %>
+                    </li>
+                    
+                        <button class="menu" onclick="showSidebar()">
+                            <a href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                    <path d="M120-240v-80h520v80H120Zm664-40L584-480l200-200 56 56-144 144 144 144-56 56ZM120-440v-80h400v80H120Zm0-200v-80h520v80H120Z"/>
+                                </svg>
+                            </a>
+                        </button>
+                    </li>
+
+                                  </ul>
+            </nav>
+        </div>
+</header>
+    
+</body>
+</html>
